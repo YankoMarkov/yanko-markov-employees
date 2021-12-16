@@ -15,9 +15,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
 
   private static final String INDEX = "index";
+  private static final String HOME = "/home";
   private static final String GRID = "grid";
 
   private final AssignmentToWorkTime adapter;
@@ -29,7 +30,7 @@ public class HomeController {
 
   @GetMapping("/")
   ModelAndView index() {
-    return new ModelAndView(INDEX);
+    return this.view(INDEX);
   }
 
   @PostMapping("/")
@@ -41,7 +42,17 @@ public class HomeController {
       adapter.addAssignment(nextAssignment);
       line = reader.readLine();
     }
+    return this.redirect(HOME);
+  }
+
+  @GetMapping("/home")
+  ModelAndView index(ModelAndView modelAndView) {
     var grid = adapter.calculatePairedAssignments();
-    return new ModelAndView(INDEX, GRID, grid);
+    if (grid.isEmpty()) {
+      modelAndView.addObject(GRID, "NoData");
+    } else {
+      modelAndView.addObject(GRID, grid);
+    }
+    return this.view(HOME, modelAndView);
   }
 }

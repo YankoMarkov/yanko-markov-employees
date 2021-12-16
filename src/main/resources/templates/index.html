@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 </head>
 <body>
 <div class="container-fluid">
     <main>
-        <hr/>
         <div>
             <h1>Welcome</h1>
             <h3>Please Choose a file</h3>
@@ -16,32 +14,6 @@
             <input type="file" name="file"/>
             <input type="submit"/>
         </form>
-        <div>
-            <table>
-                <thead>
-                <tr>
-                    <th>Employee ID #1</th>
-                    <th></th>
-                    <th>Employee ID #2</th>
-                    <th></th>
-                    <th>Project ID</th>
-                    <th></th>
-                    <th>Days worked</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="result : ${grid}" th:with="assignmen=${result.key}">
-                    <td th:text="${assignmen.getEmployeeId1()}"></td>
-                    <td></td>
-                    <td th:text="${assignmen.getEmployeeId2()}"></td>
-                    <td></td>
-                    <td th:text="${assignmen.getProjectId()}"></td>
-                    <td></td>
-                    <td th:text="${result.value}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
     </main>
 </div>
 </body>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+<body>
+<div class="container-fluid">
+    <main>
+        <div>
+            <h3>The employees who have worked together for a long time.</h3>
+        </div>
+        <div th:object="${grid}">
+            <div th:if="${grid == 'NoData'}">
+                <h4>There are no employees who have worked together for a long time.</h4>
+            </div>
+            <div th:if="${grid != 'NoData'}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Employee ID #1</th>
+                        <th></th>
+                        <th>Employee ID #2</th>
+                        <th></th>
+                        <th>Project ID</th>
+                        <th></th>
+                        <th>Days worked</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="result : ${grid}" th:with="assignmen=${result.key}">
+                        <td th:text="${assignmen.getEmployeeId1()}"></td>
+                        <td></td>
+                        <td th:text="${assignmen.getEmployeeId2()}"></td>
+                        <td></td>
+                        <td th:text="${assignmen.getProjectId()}"></td>
+                        <td></td>
+                        <td th:text="${result.value}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
