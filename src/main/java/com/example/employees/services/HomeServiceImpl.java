@@ -4,6 +4,7 @@ import com.example.employees.adapter.AssignmentToWorkTime;
 import com.example.employees.model.PairedAssignment;
 import com.example.employees.model.SoloAssignment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,13 +24,16 @@ public class HomeServiceImpl implements HomeService {
   }
 
   @Override
-  public void readFile(MultipartFile file) throws IOException {
-    BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
-    String line = reader.readLine();
-    while (line != null) {
-      SoloAssignment nextAssignment = SoloAssignment.fromString(line);
-      adapter.addAssignment(nextAssignment);
-      line = reader.readLine();
+  public void readFile(MultipartFile file) {
+    adapter.reset();
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+      String line;
+      while ((line = reader.readLine()) != null) {
+        SoloAssignment nextAssignment = SoloAssignment.fromString(line);
+        adapter.addAssignment(nextAssignment);
+      }
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
     }
   }
 

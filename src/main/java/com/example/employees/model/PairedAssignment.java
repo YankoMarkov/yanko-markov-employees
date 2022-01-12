@@ -4,9 +4,12 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class PairedAssignment {
+
   private String employeeId1;
   private String employeeId2;
   private String projectId;
+
+  private PairedAssignment() {}
 
   public static PairedAssignment createWithOrderIds(String e1, String e2, String projectId) {
     PairedAssignment result = new PairedAssignment();
@@ -16,8 +19,6 @@ public class PairedAssignment {
     result.projectId = projectId;
     return result;
   }
-
-  private PairedAssignment() {}
 
   public String getEmployeeId1() {
     return employeeId1;
@@ -46,11 +47,11 @@ public class PairedAssignment {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (o == null || this.getClass() != o.getClass()) return false;
     PairedAssignment that = (PairedAssignment) o;
-    return employeeId1.equals(that.employeeId1)
-        && employeeId2.equals(that.employeeId2)
-        && projectId.equals(that.projectId);
+    return this.employeeId1.equals(that.employeeId1)
+        && this.employeeId2.equals(that.employeeId2)
+        && this.projectId.equals(that.projectId);
   }
 
   @Override

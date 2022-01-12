@@ -13,8 +13,11 @@ import java.util.Map;
 
 public class AssignmentToWorkTime {
 
-  private final Map<String, Map<String, List<SoloAssignment>>> projectToEmployeeToAssignments =
-      new HashMap<>();
+  private Map<String, Map<String, List<SoloAssignment>>> projectToEmployeeToAssignments;
+
+  public void reset() {
+    projectToEmployeeToAssignments = new HashMap<>();
+  }
 
   public void addAssignment(SoloAssignment newAssignment) {
     Map<String, List<SoloAssignment>> employeeWorkHours;

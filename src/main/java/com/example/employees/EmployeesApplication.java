@@ -8,5 +8,6 @@ public class EmployeesApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(EmployeesApplication.class, args);
+    System.out.println("Open http://localhost:8000/");
   }
 }

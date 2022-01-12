@@ -3,20 +3,18 @@ package com.example.employees.model;
 import com.example.employees.utils.DateUtil;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 
-public class SoloAssignment implements Comparable<SoloAssignment> {
-
-  private static final Comparator<SoloAssignment> COMPARATOR =
-      Comparator.comparing(SoloAssignment::getStart);
+public class SoloAssignment {
 
   private String employeeId;
   private String projectId;
   private LocalDate start;
   private LocalDate end;
 
+  private SoloAssignment() {}
+
   public static SoloAssignment fromString(String line) {
-    String[] components = line.split(", ");
+    String[] components = line.replaceAll("\\s+", "").split(",");
 
     SoloAssignment result = new SoloAssignment();
 
@@ -31,8 +29,6 @@ public class SoloAssignment implements Comparable<SoloAssignment> {
     }
     return result;
   }
-
-  private SoloAssignment() {}
 
   public String getEmployeeId() {
     return employeeId;
@@ -64,10 +60,5 @@ public class SoloAssignment implements Comparable<SoloAssignment> {
 
   public void setEnd(LocalDate end) {
     this.end = end;
-  }
-
-  @Override
-  public int compareTo(SoloAssignment o) {
-    return COMPARATOR.compare(this, o);
   }
 }

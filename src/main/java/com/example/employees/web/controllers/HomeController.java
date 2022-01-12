@@ -17,6 +17,7 @@ public class HomeController extends BaseController {
   private static final String INDEX = "index";
   private static final String HOME = "/home";
   private static final String GRID = "grid";
+  private static final String NO_DATA = "NoData";
 
   private final HomeService homeService;
 
@@ -36,11 +37,11 @@ public class HomeController extends BaseController {
     return this.redirect(HOME);
   }
 
-  @GetMapping("/home")
+  @GetMapping(HOME)
   ModelAndView index(ModelAndView modelAndView) {
     var grid = homeService.calculatePairedAssignments();
     if (grid.isEmpty()) {
-      modelAndView.addObject(GRID, "NoData");
+      modelAndView.addObject(GRID, NO_DATA);
     } else {
       modelAndView.addObject(GRID, grid);
     }
